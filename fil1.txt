@@ -1,5 +1,2 @@
-<<<<<<< HEAD
-mjeo
-=======
 FIL1 CHANGED
->>>>>>> Change
+434
