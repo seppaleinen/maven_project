@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestSelenium" time="0.802" tests="1" errors="1" skipped="0" failures="0">
+<testsuite name="TestSelenium" time="8.531" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_37\jre\bin"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\David Eriksson\Dropbox\Public\maven struktur\complex structure\root\test\selenium"/>
+    <property name="user.dir" value="C:\Users\David Eriksson\Dropbox\Public\maven struktur\complex structure\root"/>
     <property name="java.runtime.version" value="1.6.0_37-b06"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_37\jre\lib\endorsed"/>
@@ -58,16 +58,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="test" classname="TestSelenium" time="0.802">
-    <error message="Could not start Selenium session: Not Found" type="java.lang.RuntimeException">java.lang.RuntimeException: Could not start Selenium session: Not Found
-	at com.thoughtworks.selenium.HttpCommandProcessor.throwAssertionFailureExceptionOrError(HttpCommandProcessor.java:112)
-	at com.thoughtworks.selenium.HttpCommandProcessor.getCommandResponseAsString(HttpCommandProcessor.java:183)
-	at com.thoughtworks.selenium.HttpCommandProcessor.executeCommandOnServlet(HttpCommandProcessor.java:118)
-	at com.thoughtworks.selenium.HttpCommandProcessor.doCommand(HttpCommandProcessor.java:101)
-	at com.thoughtworks.selenium.HttpCommandProcessor.getString(HttpCommandProcessor.java:275)
-	at com.thoughtworks.selenium.HttpCommandProcessor.start(HttpCommandProcessor.java:237)
-	at com.thoughtworks.selenium.DefaultSelenium.start(DefaultSelenium.java:100)
-	at TestSelenium.setUp(TestSelenium.java:15)
-</error>
-  </testcase>
+  <testcase name="test" classname="TestSelenium" time="8.531"/>
 </testsuite>
