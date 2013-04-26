@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>se.david.maven</groupId>
+        <artifactId>app</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <name>datalayer</name>
+    <artifactId>datalayer</artifactId>
+    <packaging>ear</packaging>
+
+	<properties>
+        <datalayer.artifactId>datalayer</datalayer.artifactId>
+		<datalayer.version>1.0-SNAPSHOT</datalayer.version>
+    </properties>
+
+	
+    <dependencies>
+        <dependency>
+            <groupId>se.david.maven</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>
