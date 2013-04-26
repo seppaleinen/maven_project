@@ -1,0 +1,73 @@
+# Istället för att ange vad som ska exkluderas så definieras
+# istället explicit vad som ska inkluderas. Detta för att så
+# långt det är möjligt förhindra att onödiga filer hamnar i
+# versionhanteringssystemet.
+
+# Ignorera initialt alla filer
+# -----------------------------------------------------------------
+/*
+
+# Explicita undantag för Maven moduler
+# -----------------------------------------------------------------
+
+# App modules
+!app/
+app/*
+!app/datalayer/
+app/datalayer/*
+!app/datalayer/src/
+
+!app/model/
+app/model/*
+!app/model/src/
+
+!app/web/
+app/web/*
+!app/web/src/
+
+
+# Test modules
+!test/
+test/*
+!test/selenium/
+test/selenium/*
+!test/selenium/src/
+
+# Db module
+!db/
+db/*
+!db/src/
+
+# Explicita undantag för vissa resurser, var de än befinner sig
+# -----------------------------------------------------------------
+
+# Maven
+!pom.xml
+
+# Git
+!.gitignore
+
+
+# Ignorera alltid vissa resurser, var de än befinner sig
+# -----------------------------------------------------------------
+*.orig
+*.bak
+*.old
+
+# Intellij
+*.iml
+.idea/
+
+# Eclipse 
+.project
+.classpath
+.settings/
+
+# CVS
+.cvsignore
+CVS/
+
+# OS X
+.DS_Store
+
+db/target/

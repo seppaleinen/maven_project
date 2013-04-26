@@ -8,15 +8,12 @@
     </parent>
 	    
 	<name>test</name>
+    <groupId>se.david.maven</groupId>
     <artifactId>test</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>selenium</module>
     </modules>
-
-    <properties>
-		<test.artifactId>test</test.artifactId>
-		<test.version>${root.version}</test.version>
-    </properties>
 </project>

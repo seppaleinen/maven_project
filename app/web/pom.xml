@@ -8,7 +8,10 @@
     </parent>
 
     <name>web</name>
+
+    <groupId>se.david.maven</groupId>
     <artifactId>web</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     
     <dependencies>
