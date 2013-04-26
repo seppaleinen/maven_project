@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: TestSelenium
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.079 sec <<< FAILURE!
-test(TestSelenium)  Time elapsed: 1.036 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.161 sec <<< FAILURE!
+test(TestSelenium)  Time elapsed: 1.124 sec  <<< ERROR!
 java.lang.RuntimeException: Could not contact Selenium Server; have you started it on 'localhost:4444' ?
 Read more at http://seleniumhq.org/projects/remote-control/not-started.html
 Connection refused: connect
