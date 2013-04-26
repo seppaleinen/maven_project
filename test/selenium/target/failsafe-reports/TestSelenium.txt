@@ -1,0 +1,15 @@
+-------------------------------------------------------------------------------
+Test set: TestSelenium
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.832 sec <<< FAILURE!
+test(TestSelenium)  Time elapsed: 0.802 sec  <<< ERROR!
+java.lang.RuntimeException: Could not start Selenium session: Not Found
+	at com.thoughtworks.selenium.HttpCommandProcessor.throwAssertionFailureExceptionOrError(HttpCommandProcessor.java:112)
+	at com.thoughtworks.selenium.HttpCommandProcessor.getCommandResponseAsString(HttpCommandProcessor.java:183)
+	at com.thoughtworks.selenium.HttpCommandProcessor.executeCommandOnServlet(HttpCommandProcessor.java:118)
+	at com.thoughtworks.selenium.HttpCommandProcessor.doCommand(HttpCommandProcessor.java:101)
+	at com.thoughtworks.selenium.HttpCommandProcessor.getString(HttpCommandProcessor.java:275)
+	at com.thoughtworks.selenium.HttpCommandProcessor.start(HttpCommandProcessor.java:237)
+	at com.thoughtworks.selenium.DefaultSelenium.start(DefaultSelenium.java:100)
+	at TestSelenium.setUp(TestSelenium.java:15)
+

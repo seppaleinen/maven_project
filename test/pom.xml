@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!--<module>selenium</module>-->
+        <module>selenium</module>
     </modules>
 
     <properties>

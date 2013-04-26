@@ -13,9 +13,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="web" />
-    <orderEntry type="module" module-name="datalayer" />
-    <orderEntry type="module" module-name="model" />
-    <orderEntry type="library" name="Maven: junit:junit:4.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-java:2.31.0" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-android-driver:2.31.0" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-remote-driver:2.31.0" level="project" />
@@ -56,6 +53,7 @@
     <orderEntry type="library" name="Maven: org.webbitserver:webbit:0.4.14" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty:3.5.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-support:2.31.0" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:4.8.1" level="project" />
   </component>
 </module>
 

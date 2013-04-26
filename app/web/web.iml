@@ -31,6 +31,9 @@
     <orderEntry type="module" module-name="datalayer" />
     <orderEntry type="module" module-name="model" />
     <orderEntry type="library" name="Maven: junit:junit:4.8.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
+    <orderEntry type="library" name="Maven: javaee:javaee-api:5" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016" level="project" />
   </component>
 </module>
 

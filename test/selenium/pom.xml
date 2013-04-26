@@ -16,6 +16,7 @@
             <groupId>se.david.maven</groupId>
             <artifactId>web</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <type>war</type>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -27,15 +28,105 @@
             <artifactId>selenium-api</artifactId>
             <version>2.31.0</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+        </dependency>
     </dependencies>
-	
-	<build>
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-maven2-plugin</artifactId>
+            <version>1.3.3</version>
+            <configuration>
+                <!-- Container configuration -->
+                <container>
+                    <containerId>jetty6x</containerId>
+                    <type>embedded</type>
+                </container>
+                <!-- Configuration to use with the container or the deployer -->
+                <configuration>
+                    <properties>
+                        <cargo.servlet.port>8090</cargo.servlet.port>
+                    </properties>
+                </configuration>
+                <deployables>
+                    <deployable>
+                        <groupId>se.david.maven</groupId>
+                        <artifactId>web</artifactId>
+                        <type>war</type>
+                        <properties>
+                            <context>/</context>
+                        </properties>
+                    </deployable>
+                </deployables>
+                <!-- Don't wait, execute the tests after the container is started -->
+                <wait>false</wait>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>start-container</id>
+                    <phase>pre-integration-test</phase>
+                    <goals>
+                        <goal>start</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>stop-container</id>
+                    <phase>post-integration-test</phase>
+                    <goals>
+                        <goal>stop</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.14</version>
+
+            <executions>
+                <execution>
+                    <id>integration-tests</id>
+                    <phase>integration-test</phase>
+                    <goals>
+                        <goal>integration-test</goal>
+                    </goals>
+                    <configuration>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </configuration>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>se.david.maven</groupId>
+                    <artifactId>web</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.14.1</version>
+            <configuration>
+                <excludes>
+                    <exclude>**/*</exclude>
+                </excludes>
+            </configuration>
+        </plugin>
+    </plugins>
+    </build>
+	<!--<build>
       <plugins>
          <plugin>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>maven-jetty-plugin</artifactId>
             <configuration>
-               <scanIntervalSeconds>5</scanIntervalSeconds>
                <stopPort>9966</stopPort>
                <stopKey>foo</stopKey>
                <connectors>
@@ -93,12 +184,6 @@
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-surefire-plugin</artifactId>
-              <configuration>
-                  <excludes>
-                      <exclude>**/integration/*Test.java
-                      </exclude>
-                  </excludes>
-              </configuration>
               <executions>
                   <execution>
                       <id>integration-tests</id>
@@ -108,19 +193,12 @@
                       </goals>
                       <configuration>
                           <skip>false</skip>
-                          <excludes>
-                              <exclude>none</exclude>
-                          </excludes>
-                          <includes>
-                              <include>**/integration/*Test.java
-                              </include>
-                          </includes>
                       </configuration>
                   </execution>
               </executions>
           </plugin>
       </plugins>
-   </build>
+   </build>-->
    
    
    

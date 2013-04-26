@@ -4,18 +4,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertNotNull;
+
 public class TestSelenium{
 	private Selenium selenium;
 
 	@Before
 	public void setUp() throws Exception {
-		selenium = new DefaultSelenium("localhost", 4444, "*chrome", "http://localhost:20080/maven");
+		selenium = new DefaultSelenium("localhost", 8090, "*chrome", "http://localhost:8090/Maven");
 		selenium.start();
 	}
 
 	@Test
 	public void test() throws Exception {
-		selenium.check("id=hej");
+		selenium.check("userName=null");
+        assertNotNull(null);
 	}
 
 	@After
