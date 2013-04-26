@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>se.david.maven</groupId>
+        <artifactId>root</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+	
+    <name>database</name>
+    <artifactId>database</artifactId>
+	<version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <liquibase-core.version>2.0.5</liquibase-core.version>
+        <liquibase-plugin.version>2.0.1</liquibase-plugin.version>
+        <com.oracle.driver.version>11.2</com.oracle.driver.version>
+        <!-- properties som måste sättas i .m2/settings.xml -->
+        <!--<db_dev.username>simple_db_dev</db_dev.username>
+        <db_dev.password>simple_db_dev</db_dev.password>
+        <db_dev.url>jdbc:oracle:thin:@localhost:1521:xe</db_dev.url>
+        <db_dev_admin.username>system</db_dev_admin.username>
+        <db_dev_admin.password>root</db_dev_admin.password>
+        <changeLogFile>src/main/resources/master.xml</changeLogFile>
+        <liquibase-plugin.verbose>false</liquibase-plugin.verbose>-->
+    </properties>
+
+    <!--<dependencies>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.driver</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${com.oracle.driver.version}</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>applyChanges</id>
+            <activation>
+                <property>
+                    <name>applyChanges</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>${liquibase-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <configuration>
+                                    <changeLogFile>${changeLogFile}</changeLogFile>
+                                    <driver>oracle.jdbc.driver.OracleDriver</driver>
+                                    <url>${db_dev.url}</url>
+                                    <username>${db_dev.username}</username>
+                                    <password>${db_dev.password}</password>
+                                </configuration>
+                                <goals>
+                                    <goal>update</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>dropUserApplyChanges</id>
+            <activation>
+                <property>
+                    <name>dropUserApplyChanges</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>${liquibase-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <configuration>
+                                    <changeLogFile>${changeLogFile}</changeLogFile>
+                                    <driver>oracle.jdbc.driver.OracleDriver</driver>
+                                    <url>${db_dev.url}</url>
+                                    <username>${db_dev.username}</username>
+                                    <password>${db_dev.password}</password>
+                                    <verbose>${liquibase-plugin.verbose}</verbose>
+                                </configuration>
+                                <goals>
+                                    <goal>update</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.4</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.oracle.driver</groupId>
+                                <artifactId>ojdbc6</artifactId>
+                                <version>${com.oracle.driver.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <driver>oracle.jdbc.driver.OracleDriver</driver>
+                            <url>${db_dev.url}</url>
+                            <username>${db_dev_admin.username}</username>
+                            <password>${db_dev_admin.password}</password>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <phase>initialize</phase>
+                                <configuration>
+                                   <autocommit>true</autocommit>
+                                   <sqlCommand>
+                                     drop user ${db_dev.username} cascade;
+                                     create user ${db_dev.username} identified by ${db_dev.username};
+                                     grant connect, resource, create view, create synonym to ${db_dev.username};
+                                     grant select on SYS.dba_pending_transactions to ${db_dev.username};
+                                     grant select on SYS.pending_trans$ to ${db_dev.username};
+                                     grant select on SYS.dba_2pc_pending to ${db_dev.username};
+                                     grant execute on SYS.dbms_system to ${db_dev.username};
+                                     drop user FORVALT_ROLE cascade;
+                                     drop user RVARA_PROD2 cascade;
+                                     drop user VARA_PROD2 cascade;
+                                     create user FORVALT_ROLE identified by FORVALT_ROLE;
+                                     create user RVARA_PROD2 identified by RVARA_PROD2;
+                                     create user VARA_PROD2 identified by VARA_PROD2;
+                                    </sqlCommand>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <echo>####################################################################################
+Droppar user ${db_dev.username} i databasen ${db_dev.url}
+####################################################################################</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>-->
+
+</project>
