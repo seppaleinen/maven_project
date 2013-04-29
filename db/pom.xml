@@ -18,25 +18,24 @@
         <liquibase-plugin.version>2.0.1</liquibase-plugin.version>
         <com.oracle.driver.version>11.2</com.oracle.driver.version>
         <!-- properties som måste sättas i .m2/settings.xml -->
-        <!--<db_dev.username>simple_db_dev</db_dev.username>
-        <db_dev.password>simple_db_dev</db_dev.password>
-        <db_dev.url>jdbc:oracle:thin:@localhost:1521:xe</db_dev.url>
-        <db_dev_admin.username>system</db_dev_admin.username>
-        <db_dev_admin.password>root</db_dev_admin.password>
-        <changeLogFile>src/main/resources/master.xml</changeLogFile>
-        <liquibase-plugin.verbose>false</liquibase-plugin.verbose>-->
+        <mysql.username>root</mysql.username>
+        <mysql.password>minstlol</mysql.password>
+        <mysql.url>jdbc:mysql://localhost/maven_db</mysql.url>
+        <mysql_admin.username>root</mysql_admin.username>
+        <mysql_admin.password>minstlol</mysql_admin.password>
+        <sqlscript>src/main/resources/database.sql</sqlscript>
+        <liquibase-plugin.verbose>false</liquibase-plugin.verbose>
     </properties>
-
-    <!--<dependencies>
+    <dependencies>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase-core.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.oracle.driver</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>${com.oracle.driver.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.13</version>
         </dependency>
     </dependencies>
 
@@ -59,17 +58,24 @@
                             <execution>
                                 <phase>process-resources</phase>
                                 <configuration>
-                                    <changeLogFile>${changeLogFile}</changeLogFile>
-                                    <driver>oracle.jdbc.driver.OracleDriver</driver>
-                                    <url>${db_dev.url}</url>
-                                    <username>${db_dev.username}</username>
-                                    <password>${db_dev.password}</password>
+                                    <changeLogFile>${sqlscript}</changeLogFile>
+                                    <driver>com.mysql.jdbc.Driver</driver>
+                                    <url>${mysql.url}</url>
+                                    <username>${mysql.username}</username>
+                                    <!--<password>${mysql.password}</password>-->
                                 </configuration>
                                 <goals>
                                     <goal>update</goal>
                                 </goals>
                             </execution>
                         </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>5.1.13</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -93,88 +99,50 @@
                             <execution>
                                 <phase>process-resources</phase>
                                 <configuration>
-                                    <changeLogFile>${changeLogFile}</changeLogFile>
-                                    <driver>oracle.jdbc.driver.OracleDriver</driver>
-                                    <url>${db_dev.url}</url>
-                                    <username>${db_dev.username}</username>
-                                    <password>${db_dev.password}</password>
-                                    <verbose>${liquibase-plugin.verbose}</verbose>
+                                    <changeLogFile>${sqlscript}</changeLogFile>
+                                    <driver>com.mysql.jdbc.Driver</driver>
+                                    <url>${mysql.url}</url>
+                                    <username>${mysql.username}</username>
+                                    <!--<password>${mysql.password}</password>-->
+                                    <!--<verbose>${liquibase-plugin.verbose}</verbose>-->
+                                    <!--<dropFirst>true</dropFirst>-->
                                 </configuration>
                                 <goals>
                                     <goal>update</goal>
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>sql-maven-plugin</artifactId>
-                        <version>1.4</version>
                         <dependencies>
                             <dependency>
-                                <groupId>com.oracle.driver</groupId>
-                                <artifactId>ojdbc6</artifactId>
-                                <version>${com.oracle.driver.version}</version>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>5.1.13</version>
                             </dependency>
                         </dependencies>
-                        <configuration>
-                            <driver>oracle.jdbc.driver.OracleDriver</driver>
-                            <url>${db_dev.url}</url>
-                            <username>${db_dev_admin.username}</username>
-                            <password>${db_dev_admin.password}</password>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>execute</goal>
-                                </goals>
-                                <phase>initialize</phase>
-                                <configuration>
-                                   <autocommit>true</autocommit>
-                                   <sqlCommand>
-                                     drop user ${db_dev.username} cascade;
-                                     create user ${db_dev.username} identified by ${db_dev.username};
-                                     grant connect, resource, create view, create synonym to ${db_dev.username};
-                                     grant select on SYS.dba_pending_transactions to ${db_dev.username};
-                                     grant select on SYS.pending_trans$ to ${db_dev.username};
-                                     grant select on SYS.dba_2pc_pending to ${db_dev.username};
-                                     grant execute on SYS.dbms_system to ${db_dev.username};
-                                     drop user FORVALT_ROLE cascade;
-                                     drop user RVARA_PROD2 cascade;
-                                     drop user VARA_PROD2 cascade;
-                                     create user FORVALT_ROLE identified by FORVALT_ROLE;
-                                     create user RVARA_PROD2 identified by RVARA_PROD2;
-                                     create user VARA_PROD2 identified by VARA_PROD2;
-                                    </sqlCommand>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
-                        <executions>
-                            <execution>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <echo>####################################################################################
-Droppar user ${db_dev.username} i databasen ${db_dev.url}
-####################################################################################</echo>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
+                    <!--<plugin>-->
+                        <!--<groupId>org.apache.maven.plugins</groupId>-->
+                        <!--<artifactId>maven-antrun-plugin</artifactId>-->
+                        <!--<version>1.7</version>-->
+                        <!--<executions>-->
+                            <!--<execution>-->
+                                <!--<phase>initialize</phase>-->
+                                <!--<goals>-->
+                                    <!--<goal>run</goal>-->
+                                <!--</goals>-->
+                                <!--<configuration>-->
+                                    <!--<target>-->
+                                        <!--<echo>####################################################################################-->
+<!--Droppar user ${mysql.username} i databasen ${mysql.url}-->
+<!--####################################################################################</echo>-->
+                                    <!--</target>-->
+                                <!--</configuration>-->
+                            <!--</execution>-->
+                        <!--</executions>-->
+                    <!--</plugin>-->
                 </plugins>
             </build>
         </profile>
-    </profiles>-->
-
+    </profiles>
 </project>
