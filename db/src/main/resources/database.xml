@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="1" author="eriksdav">
+        <dropTable tableName="USER"/>
+    </changeSet>
+
+    <changeSet id="2" author="eriksdav">
+        <createTable tableName="USER">
+            <column name="ID" type="INT"></column>
+            <column name="USERNAME" type="VARCHAR(30)"></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="eriksdav">
+        <sql>
+            INSERT INTO USER (ID, USERNAME) VALUES (1, "ERIKSDAV")
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="eriksdav">
+        <insert tableName="USER">
+            <column name="USERNAME">DAVID</column>
+            <column name="ID">2</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

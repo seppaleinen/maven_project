@@ -19,11 +19,9 @@
         <com.oracle.driver.version>11.2</com.oracle.driver.version>
         <!-- properties som måste sättas i .m2/settings.xml -->
         <mysql.username>root</mysql.username>
-        <mysql.password>minstlol</mysql.password>
         <mysql.url>jdbc:mysql://localhost/maven_db</mysql.url>
         <mysql_admin.username>root</mysql_admin.username>
-        <mysql_admin.password>minstlol</mysql_admin.password>
-        <sqlscript>src/main/resources/database.sql</sqlscript>
+        <sqlscript>src/main/resources/database.xml</sqlscript>
         <liquibase-plugin.verbose>false</liquibase-plugin.verbose>
     </properties>
     <dependencies>
@@ -62,7 +60,6 @@
                                     <driver>com.mysql.jdbc.Driver</driver>
                                     <url>${mysql.url}</url>
                                     <username>${mysql.username}</username>
-                                    <!--<password>${mysql.password}</password>-->
                                 </configuration>
                                 <goals>
                                     <goal>update</goal>
@@ -77,70 +74,6 @@
                             </dependency>
                         </dependencies>
                     </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>dropUserApplyChanges</id>
-            <activation>
-                <property>
-                    <name>dropUserApplyChanges</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.liquibase</groupId>
-                        <artifactId>liquibase-maven-plugin</artifactId>
-                        <version>${liquibase-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <changeLogFile>${sqlscript}</changeLogFile>
-                                    <driver>com.mysql.jdbc.Driver</driver>
-                                    <url>${mysql.url}</url>
-                                    <username>${mysql.username}</username>
-                                    <!--<password>${mysql.password}</password>-->
-                                    <!--<verbose>${liquibase-plugin.verbose}</verbose>-->
-                                    <!--<dropFirst>true</dropFirst>-->
-                                </configuration>
-                                <goals>
-                                    <goal>update</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>mysql</groupId>
-                                <artifactId>mysql-connector-java</artifactId>
-                                <version>5.1.13</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-
-                    <!--<plugin>-->
-                        <!--<groupId>org.apache.maven.plugins</groupId>-->
-                        <!--<artifactId>maven-antrun-plugin</artifactId>-->
-                        <!--<version>1.7</version>-->
-                        <!--<executions>-->
-                            <!--<execution>-->
-                                <!--<phase>initialize</phase>-->
-                                <!--<goals>-->
-                                    <!--<goal>run</goal>-->
-                                <!--</goals>-->
-                                <!--<configuration>-->
-                                    <!--<target>-->
-                                        <!--<echo>####################################################################################-->
-<!--Droppar user ${mysql.username} i databasen ${mysql.url}-->
-<!--####################################################################################</echo>-->
-                                    <!--</target>-->
-                                <!--</configuration>-->
-                            <!--</execution>-->
-                        <!--</executions>-->
-                    <!--</plugin>-->
                 </plugins>
             </build>
         </profile>

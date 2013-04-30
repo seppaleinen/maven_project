@@ -1,6 +1,15 @@
 public class User {
+    private int id;
     private String username;
     public User(){}
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -10,7 +19,6 @@ public class User {
         this.username = username;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -18,8 +26,16 @@ public class User {
 
         User user = (User) o;
 
+        if (id != user.id) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        return result;
     }
 }
