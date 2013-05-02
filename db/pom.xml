@@ -60,6 +60,7 @@
                                     <driver>com.mysql.jdbc.Driver</driver>
                                     <url>${mysql.url}</url>
                                     <username>${mysql.username}</username>
+                                    <dropFirst>true</dropFirst>
                                 </configuration>
                                 <goals>
                                     <goal>update</goal>
